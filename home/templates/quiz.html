@@ -2,67 +2,69 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	 crossorigin="anonymous">
 
-    <title>{{quiz.name}}</title>
+	<title>{{quiz.name}}</title>
 </head>
 <style>
-.timer{
-    float: right;
-}
-.total{
-    margin-bottom: 5px;
-}
-    input[type='radio']:checked:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #16b138;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
-    }
+	.timer {
+		float: right;
+	}
 
-    .logo {
-        position: relative;
-        bottom: 2rem;
-    }
+	.total {
+		margin-bottom: 5px;
+	}
 
-    .container-fluid {
-        height: 60px;
-    }
+	input[type='radio']:checked:after {
+		width: 15px;
+		height: 15px;
+		border-radius: 15px;
+		top: -2px;
+		left: -1px;
+		position: relative;
+		background-color: #16b138;
+		content: '';
+		display: inline-block;
+		visibility: visible;
+		border: 2px solid white;
+	}
 
-    .head1 {
-        color: #FBAD30;
-        font-size: 2rem;
-        font-weight: bold;
-        height: 50px;
-    }
+	.logo {
+		position: relative;
+		bottom: 2rem;
+	}
 
-    .head2 {
-        color: #EF4926;
-        font-size: 2rem;
-        font-weight: bold;
-    }
+	.container-fluid {
+		height: 60px;
+	}
+
+	.head1 {
+		color: #D4A373;
+		font-size: 2rem;
+		font-weight: bold;
+		height: 50px;
+	}
+
+	.head2 {
+		color: #CCD5AE;
+		font-size: 2rem;
+		font-weight: bold;
+	}
 </style>
 
 {% load static%}
 
 <body>
-    <nav class="navbar ">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <div>
-                  
-                    <span class="head1">Tech</span> <span class="head2">Quiz</span>
+	<nav class="navbar ">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">
+				<div>
+
+					<span class="head1">Walkover</span> <span class="head2">Quiz</span>
                 </div>
             </a>
         </div>

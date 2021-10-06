@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.contrib import admin
+
+
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -16,5 +19,7 @@ urlpatterns = [
     path('add_options/<int:myid>/', views.add_options, name='add_options'), 
     path('results/', views.results, name='results'),    
     path('delete_question/<int:myid>/', views.delete_question, name='delete_question'),  
-    path('delete_result/<int:myid>/', views.delete_result, name='delete_result'),    
+    path('delete_result/<int:myid>/', views.delete_result, name='delete_result'),  
+    path("",views.home,name="home"),
+    path("send_otp",views.send_otp,name="send otp"),  
 ]

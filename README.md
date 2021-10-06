@@ -32,7 +32,7 @@ Assessment shall be MCQ pattern.✔️
 
 There must be a question pool for the assessment.✔️
 
-We have created a pool of 20 questions in database and randomly selected 5 questions in shuffled order.
+We have created a pool of 20 - 25 questions in database and randomly selected 10 questions(can be changed by admin) in shuffled order.
 
 The questions displayed in the assessment shall be only from that pool.✔️
 

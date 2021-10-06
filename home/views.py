@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
-from django.contrib.auth  import authenticate,  login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuizForm, QuestionForm
@@ -13,21 +13,23 @@ from django.core.mail import send_mail
 
 def index(request):
     quiz = Quiz.objects.all()
-   # quiz = Quiz.objects.order_by('?')
-    para = {'quiz' : quiz}
+    # quiz = Quiz.objects.order_by('?')
+    para = {'quiz': quiz}
     return render(request, "index.html", para)
 
-@login_required(login_url = '/login')
+
+@login_required(login_url='/login')
 def quiz(request, myid):
     quiz = Quiz.objects.get(id=myid)
-    return render(request, "quiz.html", {'quiz':quiz})
+    return render(request, "quiz.html", {'quiz': quiz})
+
 
 def quiz_data_view(request, myid):
     quiz = Quiz.objects.get(id=myid)
     questions = []
-  #  shuffle_all_ques = random.shuffle(quiz.get_questions())
+    #  shuffle_all_ques = random.shuffle(quiz.get_questions())
     for q in quiz.get_questions():
-   # for q in shuffle_all_ques:
+        # for q in shuffle_all_ques:
         answers = []
         for a in q.get_answers():
             answers.append(a.content)
@@ -72,51 +74,61 @@ def save_quiz_view(request, myid):
                         if a.correct:
                             correct_answer = a.content
 
-                marks.append({str(q): {'correct_answer': correct_answer, 'answered': a_selected}})
+                marks.append({
+                    str(q): {
+                        'correct_answer': correct_answer,
+                        'answered': a_selected
+                    }
+                })
             else:
                 marks.append({str(q): 'not answered'})
-     
+
         Marks_Of_User.objects.create(quiz=quiz, user=user, score=score)
-        
+
         return JsonResponse({'passed': True, 'score': score, 'marks': marks})
-    
+
 
 def Signup(request):
     if request.user.is_authenticated:
         return redirect('/')
-    if request.method=="POST":   
+    if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
-        first_name=request.POST['first_name']
-        last_name=request.POST['last_name']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
         password = request.POST['password1']
         confirm_password = request.POST['password2']
-        
+
         if password != confirm_password:
             return redirect('/register')
-        
+
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
-        return render(request, 'login.html')  
+        return render(request, 'login.html')
     return render(request, "signup.html")
+
 
 def Login(request):
     if request.user.is_authenticated:
         return redirect('/')
-    if request.method=="POST":
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        
+
         user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_superuser:
+            return render(request, "home.html")
         
         if user is not None:
             login(request, user)
             return redirect("/")
         else:
-            return render(request, "login.html") 
+            return render(request, "login.html")
     return render(request, "login.html")
+
 
 def Logout(request):
     logout(request)
@@ -124,76 +136,99 @@ def Logout(request):
 
 
 def add_quiz(request):
-    if request.method=="POST":
+    if request.method == "POST":
         form = QuizForm(data=request.POST)
         if form.is_valid():
             quiz = form.save(commit=False)
             quiz.save()
             obj = form.instance
-            return render(request, "add_quiz.html", {'obj':obj})
+            return render(request, "add_quiz.html", {'obj': obj})
     else:
-        form=QuizForm()
-    return render(request, "add_quiz.html", {'form':form})
+        form = QuizForm()
+    return render(request, "add_quiz.html", {'form': form})
+
 
 def add_question(request):
     questions = Question.objects.all()
     questions = Question.objects.filter().order_by('-id')
-    if request.method=="POST":
+    if request.method == "POST":
         form = QuestionForm(request.POST)
         if form.is_valid():
             form.save()
             return render(request, "add_question.html")
     else:
-        form=QuestionForm()
-    return render(request, "add_question.html", {'form':form, 'questions':questions})
+        form = QuestionForm()
+    return render(request, "add_question.html", {
+        'form': form,
+        'questions': questions
+    })
+
 
 def delete_question(request, myid):
     question = Question.objects.get(id=myid)
     if request.method == "POST":
         question.delete()
         return redirect('/add_question')
-    return render(request, "delete_question.html", {'question':question})
+    return render(request, "delete_question.html", {'question': question})
 
 
 def add_options(request, myid):
     question = Question.objects.get(id=myid)
-    QuestionFormSet = inlineformset_factory(Question, Answer, fields=('content','correct', 'question'), extra=4)
-    if request.method=="POST":
+    QuestionFormSet = inlineformset_factory(Question,
+                                            Answer,
+                                            fields=('content', 'correct',
+                                                    'question'),
+                                            extra=4)
+    if request.method == "POST":
         formset = QuestionFormSet(request.POST, instance=question)
         if formset.is_valid():
             formset.save()
             alert = True
-            return render(request, "add_options.html", {'alert':alert})
+            return render(request, "add_options.html", {'alert': alert})
     else:
-        formset=QuestionFormSet(instance=question)
-    return render(request, "add_options.html", {'formset':formset, 'question':question})
+        formset = QuestionFormSet(instance=question)
+    return render(request, "add_options.html", {
+        'formset': formset,
+        'question': question
+    })
+
 
 def results(request):
     marks = Marks_Of_User.objects.all()
-    return render(request, "results.html", {'marks':marks})
+    return render(request, "results.html", {'marks': marks})
+
 
 def delete_result(request, myid):
     marks = Marks_Of_User.objects.get(id=myid)
     if request.method == "POST":
         marks.delete()
         return redirect('/results')
-    return render(request, "delete_result.html", {'marks':marks})
+    return render(request, "delete_result.html", {'marks': marks})
 
 
-def home(request):
-     return render(request, "home.html")
+def generateOTP():
+    digits = "0123456789"
+    OTP = ""
+    for i in range(4):
+        OTP += digits[math.floor(random.random() * 10)]
+    return OTP
 
-def generateOTP() :
-     digits = "0123456789"
-     OTP = ""
-     for i in range(4) :
-         OTP += digits[math.floor(random.random() * 10)]
-     return OTP
 
 def send_otp(request):
-     email=request.GET.get   ("email")
-     print(email)
-     o=generateOTP()
-     htmlgen = '<p>Your OTP is <strong>o</strong></p>'
-     send_mail('OTP request',o,'<your gmail id>',[email], fail_silently=False, html_message=htmlgen)
-     return HttpResponse(o)
+    email = request.GET.get("email")
+    print(email)
+    o = generateOTP()
+    htmlgen = '<p>Your OTP is <strong>o</strong></p>'
+    send_mail('OTP request',
+              f'Your OTP is {o}',
+              'userid', [email],
+              fail_silently=False,
+              html_message=htmlgen)
+    return HttpResponse(o)
+
+def verifird(request):
+    username = request.GET.get("user")
+    password = request.GET.get("password")
+    user = authenticate(username=username, password=password)
+    login(request, user)
+    return redirect("/")

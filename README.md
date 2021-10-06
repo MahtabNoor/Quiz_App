@@ -1,72 +1,127 @@
-# Developing Django on Repl.it
+#ONLINE ASSESSMENT QUIZ
 
-- Fork this template to get started
-- Simply hit run to start the server
-- The server will autoreload as needed. You don't need to restart the server manually.
+This is an online quiz platform made by Md. Mahtab Noor, Manavi Yadav and Sudhakar Singh Baghel, as the final project of walkover University Program. 
 
-## Add your first view
-
-1. Create a file under `mysite` named `views.py` with the following contents:
-
-```
-from django.http import HttpResponse
+A deployed version can be checked here : 
+https://WalkoverQuiz.mahtab4.repl.co
 
 
-def index(request):
-    return HttpResponse("Hello, world.")
-```
 
-2. Add a url pattern under `mysite/urls.py`. It should look like this:
+##We worked for the following specifications:
 
-```
-from django.contrib import admin
-from django.urls import path
-from . import views
+Assessment shall be MCQ pattern.✔️
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-]
-```
-
-## Shell
-
-Django utilizes the shell for managing your site. For this click on the `?` in the lower-right corner and click "Workspace shortcuts" from there you can open a new shell pane. 
-
-## Database
-
-By default this template utilizes the sqlite database engine. While this is fine for development it won't work with external users of your app as we don't persist changes to files when they happen outside the development environment. 
-
-We suggest bringing a database using an outside service. 
+There must be a question pool for the assessment.✔️
 
 
-# FINALASSESMENT
-1. Project Prerequisites :
-This Django Quiz App requires a good knowledge of html, css, javascript, 
-bootstrap, and  Python Django Framework. 
-2.Tech Stack: 
-FRONTEND- 
-HTML
-CSS
-BOOTSTRAP
-BACKEND-
-PYTHON DJANGO
-SQLITE (DATABASE)
-3.Project description :
-So here we have created 4 models or databases named Quiz, Question, Answer, 
-and marks_of_user. In the Quiz model, the details related to the quiz is added 
-like the name of the quiz etc. In the Question model as the quiz is the foreign 
-key, it is possible to add a question with respect to the quiz we want.
-It is possible to add the options and tick the correct option. Similarly in the 
-Answer model question is a foreign key all the options are saved with their 
-Boolean values and with respect to the particular question. Finally, in the marks 
-of the user model the name of the user, the user’s marks, and the name of the 
-quiz given by user is saved.
-When a super user is created using create superuser command in the prompt an 
-Admin is made.
-Admin can add a new quiz.
-Add new Question and delete question.
-4. Project Set up details:
-Insatllation of Python , Anaconda prompt,  Django framework, chrome or any 
-other browser, Text editor like atom or notepad
+The questions displayed in the assessment shall be only from that pool.✔️
+
+Number of questions in the pool shall be more than questions displayed.✔️
+
+Set a time limit for the assessment (individual timer for a question/optional).✔️
+
+Question order shall be shuffled for each candidate appearing.✔️
+
+Assessment score shall be generated at the time of submission.✔️
+
+##Admin Panel:
+
+Link of admin Login: We worked for the following specifications:
+
+Assessment shall be MCQ pattern.✔️
+
+There must be a question pool for the assessment.✔️
+
+We have created a pool of 20 questions in database and randomly selected 5 questions in shuffled order.
+
+The questions displayed in the assessment shall be only from that pool.✔️
+
+Number of questions in the pool shall be more than questions displayed.✔️
+
+Set a time limit for the assessment (individual timer for a question/optional).✔️
+
+Question order shall be shuffled for each candidate appearing.✔️
+
+Assessment score shall be generated at the time of submission.✔️
+
+Admin Panel:
+
+Link of admin Login: https://WalkoverQuiz.mahtab4.repl.co/admin
+
+
+
+Firstly user have to login to admin panel with  valid email id and password created as superuser
+
+
+Admin have options to create multiple quizzes.
+
+Admin have options to see scores of all users who attempted the test.
+
+The admin can also add new questions to the question pool using add question option.
+
+The admin can Create test by entering no. of questions which will appear in test and time limit for the test.
+
+Questions will be shuffled for each candidate who take the test.
+
+Admin can also login through test link:
+https://WalkoverQuiz.mahtab4.repl.co/ 
+if they are  superuser, though it does not provide all features of admin, though they can add quizzes, and can see result of all users who submitted their test.
+
+On clicking results of user from dropdown menu , records of all users displayed with details : Name , Score, type of quiz.
+
+
+##Extra Features:
+Simple and easy to use UI.
+Login page for storing user's data and validation of the data of users attempting for assessment.
+After submission score is displayed with details about each question 
+All users' name and score are displayed at the end using database table for storing the data and scores of the user.
+
+##Tech Stack Used:
+
+Frontend -HTML5, CSS3, JavaScript, Ajax and Bootstrap.
+Backend - PYTHON DJANGO Framework
+Database – SQLITE 
+
+##Deployment:
+
+For Deployment, we have used replit as a platform and uptimerobot to ensure server is running 24/7. 
+
+
+#CI/CD Setup:
+
+
+
+#Project Setup:
+
+##Installations
+
+Make sure to have python version 3 install on your pc or laptop. 
+Clone repository 
+https://github.com/MahtabNoor/Quiz_App
+cd Quiz_App
+
+##Installing dependencies
+
+It will install all required dependies in the project.
+pip install -r requirements.txt
+
+##Migrations
+
+To run migrations. 
+python manage.py makemigrations
+python manage.py migrate
+
+##Create superuser
+
+To create super user run. 
+python manage.py createsuperuser 
+After running this command it will ask for username, password. You can access admin panel from localhost:5000/admin/
+
+##Running locally
+
+To run at localhost. It will run on port 5000 by default.
+python manage.py runserver
+
+
+
 

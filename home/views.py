@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuizForm, QuestionForm
 from django.forms import inlineformset_factory
+import random
 
 def index(request):
     quiz = Quiz.objects.all()
+   # quiz = Quiz.objects.order_by('?')
     para = {'quiz' : quiz}
     return render(request, "index.html", para)
 
@@ -20,7 +22,9 @@ def quiz(request, myid):
 def quiz_data_view(request, myid):
     quiz = Quiz.objects.get(id=myid)
     questions = []
+  #  shuffle_all_ques = random.shuffle(quiz.get_questions())
     for q in quiz.get_questions():
+   # for q in shuffle_all_ques:
         answers = []
         for a in q.get_answers():
             answers.append(a.content)

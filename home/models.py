@@ -8,11 +8,17 @@ class Quiz(models.Model):
     number_of_questions = models.IntegerField(default=1)
     time = models.IntegerField(help_text="Duration of the quiz in seconds", default="1")
     
+
     def __str__(self):
         return self.name
 
     def get_questions(self):
-        return self.question_set.all()
+        #return self.question_set.all()
+        
+        ques_set = list(self.question_set.all())
+        sample_ques_set = random.sample(ques_set,self.number_of_questions)
+        random.shuffle(sample_ques_set)
+        return sample_ques_set
     
 class Question(models.Model):
     content = models.CharField(max_length=200)

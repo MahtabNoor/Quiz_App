@@ -14,3 +14,4 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
     
 admin.site.register(Marks_Of_User)
+

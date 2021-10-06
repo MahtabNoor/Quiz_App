@@ -44,7 +44,7 @@ Question order shall be shuffled for each candidate appearing.✔️
 
 Assessment score shall be generated at the time of submission.✔️
 
-Admin Panel:
+##Admin Panel:
 
 Link of admin Login: ```https://WalkoverQuiz.mahtab4.repl.co/admin```
 
@@ -90,6 +90,10 @@ For Deployment, we have used replit as a platform and uptimerobot to ensure serv
 
 
 # CI/CD Setup:
+
+Application is deployed on top of CI/CD pipeline of Replit platform.
+Load Balance : Replit automatically manages load balancing.
+Availability : For 24/7 availability, we use uptimerobot.
 
 
 

@@ -1,71 +1,83 @@
-{% extends 'base.html' %}
-{% block title %} Quiz {% endblock %}
-{% block css %}
+{% extends 'base.html' %} {% block title %} Quiz {% endblock %} {% block css %}
 <style>
-  
-.attempt {
-    --gradient: linear-gradient(to left top, #ffffff 10%, #aaaaaa 90%) !important;
-  }
-  body {
-    background: #FFFFFF;
-  }
+	.attempt {
+		--gradient: linear-gradient(to left top, #FEFAE0 10%, #CCD5AE 90%) !important;
+	}
 
-  .card {
-    background: #FFA500;
-    
-    color: #ffffff;
-   
-  }
+	body {
+		background: #FEFAE0;
+	}
 
-  #btn {
-    border: 5px solid;
-color: #ffffff;
-    border-image-slice: 1;
-    background: var(--gradient) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    border-image-source: var(--gradient) !important;
-    text-decoration: none;
-    position: relative;
-    left: 80px;
-  }
+	.head1 {
+		color: #D4A373;
+		font-size: 2rem;
+		font-weight: bold;
+		height: 50px;
+	}
 
-  .head1 {
-    color: #FBAD30;
-    font-size: 2rem;
-    font-weight: bold;
-    height: 50px;
-  }
+	.head2 {
+		color: #CCD5AE;
+		font-size: 2rem;
+		font-weight: bold;
+	}
 
-  .head2 {
-    color: #EF4926;
-    font-size: 2rem;
-    font-weight: bold;
-  }
+	.card {
+		background: #D4A373;
+		color: #ffffff;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-width: 250px;
+		word-wrap: break-word;
+		border: 1px solid rgba(0, 0, 0, .125);
+		border-radius: .25rem;
+	}
 
+	.row {
+		--bs-gutter-x: 1.5rem;
+		--bs-gutter-y: 0;
+		display: flex;
+		margin-top: calc(var(--bs-gutter-y) * -1);
+		margin-right: calc(var(--bs-gutter-x) * -.5);
+		margin-left: calc(var(--bs-gutter-x) * -.5);
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
 
+	#btn {
+		border: 5px solid;
+		color: #FEFAE0;
+		border-image-slice: 1;
+		background: var(--gradient) !important;
+		-webkit-background-clip: text !important;
+		-webkit-text-fill-color: transparent !important;
+		border-image-source: var(--gradient) !important;
+		text-decoration: none;
+		position: relative;
+		left: 50%;
+		transform: translate(-50%);
+	}
 
-  .logo {
-    position: relative;
-    bottom: 2rem;
-  }
+	.logo {
+		position: relative;
+		bottom: 2rem;
+	}
 
-  .container-fluid {
-    height: 60px;
-  }
+	.container-fluid {
+		height: 60px;
+	}
 </style>
-{% endblock %}
-{% load static %}
-
-{% block body %}
+{% endblock %} {% load static %} {% block body %}
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal-title"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-title"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       {% if user.is_authenticated %}
       <div class="modal-body" id="modal-body">
@@ -86,12 +98,12 @@ color: #ffffff;
 
 <!-- cards -->
 <div class="container">
-  <div class="container mx-auto mt-2">
+  <div class="container mx-auto my-auto">
     <div class="row">
 
       {% for i in quiz %}
-      <div class="col-md-4">
-        <div class="card" style="width: 21rem;">
+      <div class="col">
+        <div class="card">
           <div class="card-body">
             <h5 class="card-title" style="text-align: center;">{{i.name}}</h5>
             <br>

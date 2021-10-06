@@ -6,7 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import QuizForm, QuestionForm
 from django.forms import inlineformset_factory
-import random
+import math, random
+from django.http import HttpResponse
+from django.core.mail import send_mail
+
 
 def index(request):
     quiz = Quiz.objects.all()
@@ -175,3 +178,22 @@ def delete_result(request, myid):
         marks.delete()
         return redirect('/results')
     return render(request, "delete_result.html", {'marks':marks})
+
+
+def home(request):
+     return render(request, "home.html")
+
+def generateOTP() :
+     digits = "0123456789"
+     OTP = ""
+     for i in range(4) :
+         OTP += digits[math.floor(random.random() * 10)]
+     return OTP
+
+def send_otp(request):
+     email=request.GET.get   ("email")
+     print(email)
+     o=generateOTP()
+     htmlgen = '<p>Your OTP is <strong>o</strong></p>'
+     send_mail('OTP request',o,'<your gmail id>',[email], fail_silently=False, html_message=htmlgen)
+     return HttpResponse(o)

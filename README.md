@@ -5,14 +5,15 @@ This is an online quiz platform made by Md. Mahtab Noor, Manavi Yadav and Sudhak
 A deployed version can be checked here : 
 ```https://WalkoverQuiz.mahtab4.repl.co```
 
-
-## DEMO VIDEO:
-
+# DEMO VIDEO:
 
 
 
 
-https://user-images.githubusercontent.com/88780692/136245593-fcb00956-7dc4-460c-9a9b-65dcf82ed139.mp4
+
+https://user-images.githubusercontent.com/88780692/136253097-5d65bb05-bd66-4b20-95d8-0bc86560b3a6.mp4
+
+
 
 
 

@@ -215,20 +215,23 @@ def generateOTP():
 
 
 def send_otp(request):
-    email = request.GET.get("email")
+    email = request.POST["email"]
     print(email)
-    o = generateOTP()
-    htmlgen = '<p>Your OTP is <strong>o</strong></p>'
-    send_mail('OTP request',
+    try:
+        o = generateOTP()
+        htmlgen = '<p>Your OTP is <strong>o</strong></p>'
+        send_mail('OTP request',
               f'Your OTP is {o}',
-              'userid', [email],
+              'ciscoideathonmahtab@gmail.com', ["ciscoideathonmahtab@gmail.com"],
               fail_silently=False,
               html_message=htmlgen)
-    return HttpResponse(o)
+        return HttpResponse(o)
+    except Exception as e:
+      print(e)
 
 def verifird(request):
-    username = request.GET.get("user")
-    password = request.GET.get("password")
+    username = request.POST["user"]
+    password = request.POST["password"]
     user = authenticate(username=username, password=password)
     login(request, user)
     return redirect("/")

@@ -48,6 +48,8 @@ Admin Panel:
 
 Link of admin Login: ```https://WalkoverQuiz.mahtab4.repl.co/admin```
 
+admin id: walkover
+admin password: 123456
 
 
 Firstly user have to login to admin panel with  valid email id and password created as superuser
